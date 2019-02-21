@@ -22,8 +22,62 @@
         <version>4.12</version>
         <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+    <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>8.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.json.bind</groupId>
+        <artifactId>javax.json.bind-api</artifactId>
+        <version>1.0</version>
+        <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.eclipse</groupId>
+        <artifactId>yasson</artifactId>
+        <version>1.0</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <version>1.1</version>
+        <scope>compile</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.wildfly.plugins/wildfly-maven-plugin -->
+    <dependency>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+        <version>2.0.1.Final</version>
+        <exclusions>
+            <exclusion>
+                <groupId>sun.jdk</groupId>
+                <artifactId>jconsole</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.8</version>
+    </dependency>
 
 
 </dependencies>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+        </plugin>
+    </plugins>
+</build>
+
 
 </project>

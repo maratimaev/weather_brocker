@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.ejb.Stateless;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
@@ -19,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-
+@Stateless
 public class PollYahoo {
 
     private static final String APP_ID = "kYAIGJ64";
