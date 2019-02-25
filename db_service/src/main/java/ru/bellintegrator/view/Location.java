@@ -1,8 +1,10 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
 
     @JsonProperty("woeid")
     private Integer woeid;

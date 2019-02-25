@@ -8,7 +8,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 
 @MessageDriven(
-        mappedName="java:/jms/queue/TestQ",
+        mappedName="java:/jms/queue/AdminApiToYahooWeather",
         activationConfig = {
                 @ActivationConfigProperty(
                         propertyName = "acknowledgeMode",
@@ -18,20 +18,17 @@ import javax.jms.MessageListener;
                         propertyValue = "javax.jms.Queue"),
                 @ActivationConfigProperty(
                         propertyName = "destination",
-                        propertyValue = "java:/jms/queue/TestQ"),
+                        propertyValue = "java:/jms/queue/AdminApiToYahooWeather"),
         })
-
 public class JmsListener implements MessageListener {
 
-    @Resource(mappedName = "java:app/yahoo_weather/PollYahoo!ru.bellintegrator.PollYahoo")
-    PollYahoo pollYahoo;
+    @Resource(mappedName = "java:app/yahoo_weather/Service!ru.bellintegrator.Service")
+    Service service;
 
     @Override
     public void onMessage(Message message) {
         try {
-            String msg = message.getBody(String.class);
-            String str = pollYahoo.poll(msg);
-            String str1 = "wfwf";
+            service.RequestWeather(message.getBody(String.class));
         } catch (JMSException e) {
             throw new RuntimeException("Error recieving message", e);
         }

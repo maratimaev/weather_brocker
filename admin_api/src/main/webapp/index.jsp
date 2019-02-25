@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="ru.bellintegrator.SetWeatherLocation" %>
+<%@ page import="ru.bellintegrator.WeatherLocation" %>
 <%@ page import="javax.naming.Context" %>
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="javax.naming.NamingException" %>
@@ -15,10 +15,10 @@
         <%  String result = "ready for send";
             try {
                 Context ctx = new InitialContext();
-                SetWeatherLocation setWeatherLocation = (SetWeatherLocation) ctx.lookup("java:app/admin-api-0.1/SetWeatherLocation!ru.bellintegrator.SetWeatherLocation");
+                WeatherLocation weatherLocation = (WeatherLocation) ctx.lookup("java:app/admin_api-0.1/WeatherLocation!ru.bellintegrator.WeatherLocation");
                 String cityName = request.getParameter("cityName");
                 if (cityName != null) {
-                    setWeatherLocation.sendMessage(cityName);
+                    weatherLocation.sendMessage(cityName);
                     result = "poll weather for " + cityName;
                 }
             } catch (NamingException e) {

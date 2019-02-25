@@ -28,7 +28,7 @@ public class PollYahoo {
     private static final String CONSUMER_SECRET = "23081a84d99662043bded37ead72a8b4ab919ae2";
     private static final String URL = "https://weather-ydn-yql.media.yahoo.com/forecastrss";
 
-    public String poll(String city) {
+    public String get(String city) {
         long timestamp = new Date().getTime() / 1000;
         byte[] nonce = new byte[32];
         Random rand = new Random();

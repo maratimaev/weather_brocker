@@ -9,12 +9,12 @@ import javax.jms.JMSContext;
 import javax.jms.Queue;
 
 @Stateless
-public class SetWeatherLocation {
+public class WeatherLocation {
     @Inject
     @JMSConnectionFactory("java:/ConnectionFactory")
     JMSContext context;
 
-    @Resource(mappedName = "java:/jms/queue/TestQ")
+    @Resource(mappedName = "java:/jms/queue/AdminApiToYahooWeather")
     Queue queue;
 
     public void sendMessage(String message) {

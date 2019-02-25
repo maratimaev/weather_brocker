@@ -9,6 +9,6 @@ public class PollYahooTest {
     @Test
     public void whenPollYahooThenGetWeather() {
         PollYahoo pollYahoo = new PollYahoo();
-        assertThat(pollYahoo.poll("Ufa").contains("Bashkortostan Republic"), is(true));
+        assertThat(pollYahoo.get("Ufa").contains("Bashkortostan Republic"), is(true));
     }
 }
