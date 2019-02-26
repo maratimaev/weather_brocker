@@ -1,4 +1,4 @@
-package ru.bellintegrator;
+package ru.bellintegrator.yahoo;
 
 import org.junit.Test;
 

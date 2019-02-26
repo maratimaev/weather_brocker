@@ -1,10 +1,10 @@
-package ru.bellintegrator.view;
+package ru.bellintegrator.yahoo.view;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class Location implements Serializable {
+public class LocationView implements Serializable {
 
     @JsonProperty("woeid")
     private Integer woeid;
@@ -85,7 +85,7 @@ public class Location implements Serializable {
 
     @Override
     public String toString() {
-        return "Location{" +
+        return "LocationView{" +
                 "woeid=" + woeid +
                 ", city='" + city + '\'' +
                 ", region='" + region + '\'' +

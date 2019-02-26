@@ -17,6 +17,7 @@ public class WeatherLocation {
     @Resource(mappedName = "java:/jms/queue/AdminApiToYahooWeather")
     Queue queue;
 
+
     public void sendMessage(String message) {
             context.createProducer().send(queue, message);
     }
