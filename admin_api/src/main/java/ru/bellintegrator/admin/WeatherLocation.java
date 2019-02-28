@@ -1,6 +1,5 @@
-package ru.bellintegrator;
+package ru.bellintegrator.admin;
 
-import ru.bellintegrator.view.YahooWeather;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -10,15 +9,16 @@ import javax.jms.JMSContext;
 import javax.jms.Queue;
 
 @Stateless
-public class JmsSender {
+public class WeatherLocation {
     @Inject
     @JMSConnectionFactory("java:/ConnectionFactory")
     JMSContext context;
 
-    @Resource(mappedName = "java:/jms/queue/YahooWeatherToDbService")
+    @Resource(mappedName = "java:/jms/queue/AdminApiToYahooWeather")
     Queue queue;
 
-    public void sendMessage(YahooWeather weather) {
-        context.createProducer().send(queue, weather);
+
+    public void sendMessage(String message) {
+            context.createProducer().send(queue, message);
     }
 }

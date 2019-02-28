@@ -1,13 +1,13 @@
 package ru.bellintegrator.db.dao;
 
+import org.springframework.stereotype.Repository;
 import ru.bellintegrator.db.model.YahooWeather;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless
+@Repository
 public class YahooWeatherDao {
     @PersistenceContext(unitName = "postgre")
     private EntityManager em;
@@ -15,6 +15,7 @@ public class YahooWeatherDao {
     public void save(YahooWeather yahooWeather) {
         try {
             em.persist(yahooWeather);
+            String str = "wefqwf";
         }catch (Exception e) {
             System.out.println(e);
         }

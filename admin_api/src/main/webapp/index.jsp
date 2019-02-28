@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="ru.bellintegrator.WeatherLocation" %>
+<%@ page import="ru.bellintegrator.admin.WeatherLocation" %>
 <%@ page import="javax.naming.Context" %>
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="javax.naming.NamingException" %>
@@ -15,7 +15,7 @@
         <%  String result = "ready for send";
             try {
                 Context ctx = new InitialContext();
-                WeatherLocation weatherLocation = (WeatherLocation) ctx.lookup("java:app/admin_api-0.1/WeatherLocation!ru.bellintegrator.WeatherLocation");
+                WeatherLocation weatherLocation = (WeatherLocation) ctx.lookup("java:app/admin_api-0.1/WeatherLocation!ru.bellintegrator.admin.WeatherLocation");
                 String cityName = request.getParameter("cityName");
                 if (cityName != null) {
                     weatherLocation.sendMessage(cityName);
