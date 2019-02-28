@@ -22,6 +22,5 @@ public class YahooWeatherService {
     public void saveWeather(YahooWeatherView yahooWeatherView) {
         YahooWeather yahooWeather = mapperFacade.mapToModel(yahooWeatherView, new YahooWeather());
         yahooWeatherDao.save(yahooWeather);
-        String Str = "weqe";
     }
 }
