@@ -1,13 +1,8 @@
-package ru.bellintegrator.db;
+package net.proselyte.bookmanager;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import ru.bellintegrator.db.dao.YahooWeatherDao;
-import ru.bellintegrator.db.service.YahooWeatherService;
-import ru.bellintegrator.db.view.LocationView;
-import ru.bellintegrator.db.view.YahooWeatherView;
+import net.proselyte.bookmanager.view.LocationView;
+import net.proselyte.bookmanager.view.YahooWeatherView;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,21 +13,21 @@ import java.io.IOException;
 @WebServlet(value="/test", loadOnStartup=1)
 public class Servlet extends HttpServlet {
 
-    @Autowired
-    private YahooWeatherService yahooWeatherService;
+//    @Autowired
+//    private YahooWeatherService yahooWeatherService;
+//
+//    @Autowired
+//    private YahooWeatherDao yahooWeatherDao;
 
-    @Autowired
-    private YahooWeatherDao yahooWeatherDao;
-
-    public void init(ServletConfig config) {
-        try {
-            super.init(config);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
-//        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
+//    public void init(ServletConfig config) {
+//        try {
+//            super.init(config);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        }
+////        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+//        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +45,7 @@ public class Servlet extends HttpServlet {
         YahooWeatherView yahooWeatherView = new YahooWeatherView();
         yahooWeatherView.setLocationView(locationsView);
 
-        yahooWeatherService.saveWeather(yahooWeatherView);
+//        yahooWeatherService.saveWeather(yahooWeatherView);
 
         resp.getWriter().println("Hello from servlet");
     }

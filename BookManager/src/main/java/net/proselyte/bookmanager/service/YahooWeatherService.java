@@ -1,6 +1,6 @@
-package ru.bellintegrator.db.service;
+package net.proselyte.bookmanager.service;
 
-import ru.bellintegrator.db.view.YahooWeatherView;
+import net.proselyte.bookmanager.view.YahooWeatherView;
 
 public interface YahooWeatherService {
     public void saveWeather(YahooWeatherView yahooWeatherView);

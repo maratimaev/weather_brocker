@@ -1,43 +1,107 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-   http://www.springframework.org/schema/tx
-   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    <context:component-scan base-package="ru.bellintegrator.db"/>
 
+    <!--maven commons-dbcp-->
+    <!-- Database Information -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url"
+                  value="jdbc:postgresql://localhost:5432/weather"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="Zz123456"/>
+    </bean>
 
-   http://www.springframework.org/schema/context
-   http://www.springframework.org/schema/context/spring-context-3.0.xsd
-   http://www.springframework.org/schema/jee
-   http://www.springframework.org/schema/jee/spring-jee.xsd">
+    <!-- Hibernate 4 SessionFactory Bean definition -->
+    <bean id="hibernate4AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>ru.bellintegrator.db.model.YahooWeather</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="javax.persistence.schema-generation.database.action">drop-and-create</prop>
+            </props>
+        </property>
+    </bean>
 
+    <!--&lt;!&ndash;BookDao and BookService beans&ndash;&gt;-->
+    <!--<bean id="yahooWeatherDao" class="ru.bellintegrator.db.dao.YahooWeatherDaoIml">-->
+        <!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>-->
+    <!--</bean>-->
 
-    <context:component-scan base-package="ru.bellintegrator"/>
+    <!--<bean id="yahooWeatherService" class="ru.bellintegrator.db.service.YahooWeatherServiceImpl">-->
+        <!--<property name="yahooWeatherDao" ref="yahooWeatherDaoIml"/>-->
+    <!--</bean>-->
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <tx:annotation-driven proxy-target-class="true"/>
 
-    <bean id="transactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:dataSource-ref="dataSource" p:persistenceUnitName="postgre">
-    </bean>
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-    <!--<property name="driverClassName" value="org.postgresql.Driver"/>-->
-    <!--<property name="url" value="jdbc:postgresql://localhost:5432/weather"/>-->
-    <!--<property name="username" value="postgres"/>-->
-    <!--<property name="password" value="Zz123456"/>-->
-    <!--</bean>-->
-    <jee:jndi-lookup id="dataSource" jndi-name="java:/PostgresXADS" expected-type="javax.sql.DataSource" />
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
 
 </beans>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:p="http://www.springframework.org/schema/p"-->
+       <!--xmlns:context="http://www.springframework.org/schema/context"-->
+       <!--xmlns:tx="http://www.springframework.org/schema/tx"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xmlns:jee="http://www.springframework.org/schema/jee"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+   <!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
+   <!--http://www.springframework.org/schema/tx-->
+   <!--http://www.springframework.org/schema/tx/spring-tx-3.0.xsd-->
+   <!--http://www.springframework.org/schema/context-->
+   <!--http://www.springframework.org/schema/context/spring-context-3.0.xsd-->
+   <!--http://www.springframework.org/schema/jee-->
+   <!--http://www.springframework.org/schema/jee/spring-jee.xsd">-->
+
+
+    <!--<context:component-scan base-package="ru.bellintegrator"/>-->
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!--<bean id="transactionManager"-->
+          <!--class="org.springframework.orm.jpa.JpaTransactionManager">-->
+        <!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
+    <!--</bean>-->
+
+    <!--<bean id="entityManagerFactory"-->
+          <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"-->
+          <!--p:dataSource-ref="dataSource" p:persistenceUnitName="postgre">-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="driverClassName" value="org.postgresql.Driver"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="url" value="jdbc:postgresql://localhost:5432/weather"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="username" value="postgres"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="password" value="Zz123456"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+    <!--<jee:jndi-lookup id="dataSource" jndi-name="java:jboss/datasources/ExampleDS" expected-type="javax.sql.DataSource" />-->
+
+<!--</beans>-->

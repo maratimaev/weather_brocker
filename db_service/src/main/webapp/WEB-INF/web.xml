@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0">
-    <listener>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+<listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
@@ -14,4 +15,24 @@
             /WEB-INF/applicationContext.xml
         </param-value>
     </context-param>
+
+        <servlet>
+            <servlet-name>math</servlet-name>
+            <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
+            <init-param>
+                <param-name>service-class</param-name>
+                <param-value>net.proselyte.bookmanager.MathServiceImpl</param-value>
+            </init-param>
+            <init-param>
+                <param-name>api-class</param-name>
+                <param-value>net.proselyte.bookmanager.MathService</param-value>
+            </init-param>
+        </servlet>
+
+    <servlet-mapping>
+        <servlet-name>math</servlet-name>
+        <url-pattern>/hessian/math</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

@@ -20,6 +20,8 @@
         <module>yahoo_weather</module>
         <module>admin_api</module>
         <module>db_service</module>
+        <module>weather_service</module>
+        <module>BookManager</module>
     </modules>
 
 	<build>

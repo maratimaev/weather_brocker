@@ -1,6 +1,6 @@
-package ru.bellintegrator.db.dao;
+package net.proselyte.bookmanager.dao;
 
-import ru.bellintegrator.db.model.YahooWeather;
+import net.proselyte.bookmanager.model.YahooWeather;
 
 import java.util.List;
 

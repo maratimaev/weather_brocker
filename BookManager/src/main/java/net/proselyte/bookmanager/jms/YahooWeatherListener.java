@@ -1,10 +1,10 @@
-package ru.bellintegrator.db.jms;
+package net.proselyte.bookmanager.jms;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import net.proselyte.bookmanager.service.YahooWeatherService;
+import net.proselyte.bookmanager.view.YahooWeatherView;
+import net.proselyte.bookmanager.view.map.YahooWeatherViewDeserialize;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import ru.bellintegrator.db.service.YahooWeatherService;
-import ru.bellintegrator.db.view.YahooWeatherView;
-import ru.bellintegrator.db.view.map.YahooWeatherViewDeserialize;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.ActivationConfigProperty;
@@ -26,15 +26,24 @@ import javax.jms.MessageListener;
                         propertyName = "destination",
                         propertyValue = "java:/jms/queue/YahooWeatherToDbService")
         })
+@Component
 public class YahooWeatherListener implements MessageListener {
 
-    @Autowired
-    YahooWeatherService yahooWeatherService;
+//    @Autowired
+    private YahooWeatherService yahooWeatherService;
 
-    @Autowired
-    YahooWeatherViewDeserialize yahooWeatherViewDeserialize;
+//    @Autowired
+    private YahooWeatherViewDeserialize yahooWeatherViewDeserialize;
 
-    @PostConstruct
+    public void setYahooWeatherService(YahooWeatherService yahooWeatherService) {
+        this.yahooWeatherService = yahooWeatherService;
+    }
+
+    public void setYahooWeatherViewDeserialize(YahooWeatherViewDeserialize yahooWeatherViewDeserialize) {
+        this.yahooWeatherViewDeserialize = yahooWeatherViewDeserialize;
+    }
+
+        @PostConstruct
     public void init() throws Exception {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
