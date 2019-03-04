@@ -4,7 +4,7 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-<listener>
+    <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
@@ -16,18 +16,18 @@
         </param-value>
     </context-param>
 
-        <servlet>
-            <servlet-name>math</servlet-name>
-            <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
-            <init-param>
-                <param-name>service-class</param-name>
-                <param-value>net.proselyte.bookmanager.MathServiceImpl</param-value>
-            </init-param>
-            <init-param>
-                <param-name>api-class</param-name>
-                <param-value>net.proselyte.bookmanager.MathService</param-value>
-            </init-param>
-        </servlet>
+    <servlet>
+        <servlet-name>math</servlet-name>
+        <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
+        <init-param>
+            <param-name>service-class</param-name>
+            <param-value>ru.bellintegrator.db.MathServiceImpl</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api-class</param-name>
+            <param-value>ru.bellintegrator.db.MathService</param-value>
+        </init-param>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>math</servlet-name>

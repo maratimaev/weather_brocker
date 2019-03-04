@@ -2,7 +2,6 @@ package ru.bellintegrator.db.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.db.model.YahooWeather;
 
@@ -10,10 +9,7 @@ import java.util.List;
 
 @Repository
 public class YahooWeatherDaoIml implements YahooWeatherDao{
-//    @PersistenceContext(unitName = "postgre")
-//    private EntityManager em;
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -34,7 +30,8 @@ public class YahooWeatherDaoIml implements YahooWeatherDao{
     public List<YahooWeather> findAll(){
 //        List<YahooWeatherView> list = em.createQuery("select y from " + YahooWeatherView.class.getSimpleName() + " y")
 //                .getResultList();
-
-        return null;
+        Session session = this.sessionFactory.getCurrentSession();
+        List<YahooWeather> yahooWeatherList = session.createQuery("from YahooWeather").list();
+        return yahooWeatherList;
     }
 }

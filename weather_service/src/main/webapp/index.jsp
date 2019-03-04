@@ -5,7 +5,7 @@
 
 // http://localhost:8080/resin-doc/protocols/tutorial/hessian-service/hessian/math
 
-    String url = ("http://localhost:8080/db_service-0.1/hessian/math");
+    String url = ("http://localhost:8080/db_service/hessian/math");
 
 //    String url = ("http://" +
 //            request.getServerName() + ":" + request.getServerPort() +

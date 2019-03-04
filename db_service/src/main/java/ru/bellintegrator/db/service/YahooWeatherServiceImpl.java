@@ -15,7 +15,6 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
     @Autowired
     private MapperFacade mapperFacade;
 
-    @Autowired
     private YahooWeatherDao yahooWeatherDao;
 
     public void setYahooWeatherDao(YahooWeatherDao yahooWeatherDao) {
@@ -26,9 +25,5 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
     public void saveWeather(YahooWeatherView yahooWeatherView) {
         YahooWeather yahooWeather = mapperFacade.mapToModel(yahooWeatherView, new YahooWeather());
         yahooWeatherDao.save(yahooWeather);
-    }
-
-    public void hessianServer(){
-
     }
 }
