@@ -17,22 +17,41 @@
     </context-param>
 
     <servlet>
-        <servlet-name>math</servlet-name>
-        <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
+        <servlet-name>get</servlet-name>
+        <!--<servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>-->
+        <servlet-class>ru.bellintegrator.db.FireServlet</servlet-class>
         <init-param>
             <param-name>service-class</param-name>
-            <param-value>ru.bellintegrator.db.MathServiceImpl</param-value>
+            <param-value>ru.bellintegrator.db.service.CommonWeatherServiceImpl</param-value>
         </init-param>
         <init-param>
             <param-name>api-class</param-name>
-            <param-value>ru.bellintegrator.db.MathService</param-value>
+            <param-value>ru.bellintegrator.common.CommonWeatherService</param-value>
         </init-param>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>math</servlet-name>
-        <url-pattern>/hessian/math</url-pattern>
+        <servlet-name>get</servlet-name>
+        <url-pattern>/list</url-pattern>
     </servlet-mapping>
+
+    <!--<servlet>-->
+        <!--<servlet-name>math</servlet-name>-->
+        <!--<servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>service-class</param-name>-->
+            <!--<param-value>ru.bellintegrator.db.MathServiceImpl</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>api-class</param-name>-->
+            <!--<param-value>ru.bellintegrator.db.MathService</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>math</servlet-name>-->
+        <!--<url-pattern>/hessian/math</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
 </web-app>

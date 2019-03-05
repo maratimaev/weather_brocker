@@ -26,6 +26,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>ru.bellintegrator.common</groupId>
+            <artifactId>common_interface</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.wildfly.plugins</groupId>
             <artifactId>wildfly-maven-plugin</artifactId>
             <version>2.0.1.Final</version>
@@ -76,7 +82,12 @@
             <artifactId>hessian</artifactId>
             <version>4.0.38</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.8</version>
+        </dependency>
     </dependencies>
 
     <build>

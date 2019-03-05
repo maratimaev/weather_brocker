@@ -6,6 +6,7 @@ import ru.bellintegrator.db.service.YahooWeatherService;
 import ru.bellintegrator.db.view.YahooWeatherView;
 import ru.bellintegrator.db.view.map.YahooWeatherViewDeserialize;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
@@ -33,10 +34,10 @@ public class YahooWeatherListener extends SpringBeanAutowiringSupport implements
     @Autowired
     YahooWeatherViewDeserialize yahooWeatherViewDeserialize;
 
-//    @PostConstruct
-//    public void init() throws Exception {
-//        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-//    }
+    @PostConstruct
+    public void init() throws Exception {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
     @Override
     public void onMessage(Message message) {
