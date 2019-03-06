@@ -1,5 +1,7 @@
 package ru.bellintegrator.yahoo.jms;
 
+import ru.bellintegrator.common.view.YahooWeatherView;
+
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,7 +18,7 @@ public class DbServiceSender {
     @Resource(mappedName = "java:/jms/queue/YahooWeatherToDbService")
     Queue queue;
 
-    public void sendMessage(String weather) {
-        context.createProducer().send(queue, weather);
+    public void sendMessage(YahooWeatherView yahooWeatherView) {
+        context.createProducer().send(queue, yahooWeatherView);
     }
 }

@@ -14,17 +14,21 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id_loc")
+    private Integer idLoc;
 
     @Version
     private Integer version;
 
-    private Integer woeid;
+    private Integer woeId;
 
+    @Column(length = 100)
     private String city;
 
+    @Column(length = 100)
     private String region;
 
+    @Column(length = 50)
     private String country;
 
     private Float lattitude;
@@ -34,16 +38,16 @@ public class Location {
     @Column(name = "timezone_id")
     private String timezoneId;
 
-    public int getId() {
-        return id;
+    public Integer getIdLoc() {
+        return idLoc;
     }
 
-    public Integer getWoeid() {
-        return woeid;
+    public Integer getWoeId() {
+        return woeId;
     }
 
-    public void setWoeid(Integer woeid) {
-        this.woeid = woeid;
+    public void setWoeId(Integer woeId) {
+        this.woeId = woeId;
     }
 
     public String getCity() {

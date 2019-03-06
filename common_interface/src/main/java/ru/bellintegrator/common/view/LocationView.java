@@ -1,21 +1,28 @@
 package ru.bellintegrator.common.view;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+@JsonPropertyOrder({
+        "woeid",
+        "city",
+        "region",
+        "country",
+        "lat",
+        "long",
+        "timezone_id"
+})
 public class LocationView implements Serializable {
 
     @JsonProperty("woeid")
-    private Integer woeid;
+    private Integer woeId;
 
-    @JsonProperty("city")
     private String city;
 
-    @JsonProperty("region")
     private String region;
 
-    @JsonProperty("country")
     private String country;
 
     @JsonProperty("lat")
@@ -27,12 +34,12 @@ public class LocationView implements Serializable {
     @JsonProperty("timezone_id")
     private String timezoneId;
 
-    public Integer getWoeid() {
-        return woeid;
+    public Integer getWoeId() {
+        return woeId;
     }
 
-    public void setWoeid(Integer woeid) {
-        this.woeid = woeid;
+    public void setWoeid(Integer woeId) {
+        this.woeId = woeId;
     }
 
     public String getCity() {
@@ -86,7 +93,7 @@ public class LocationView implements Serializable {
     @Override
     public String toString() {
         return "LocationView{" +
-                "woeid=" + woeid +
+                "woeid=" + woeId +
                 ", city='" + city + '\'' +
                 ", region='" + region + '\'' +
                 ", country='" + country + '\'' +

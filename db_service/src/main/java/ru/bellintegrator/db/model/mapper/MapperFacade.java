@@ -1,7 +1,7 @@
 package ru.bellintegrator.db.model.mapper;
 
+import ru.bellintegrator.common.view.YahooWeatherView;
 import ru.bellintegrator.db.model.YahooWeather;
-import ru.bellintegrator.db.view.YahooWeatherView;
 
 import java.util.List;
 

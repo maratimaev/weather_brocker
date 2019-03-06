@@ -2,9 +2,8 @@ package ru.bellintegrator.db.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import ru.bellintegrator.common.view.YahooWeatherView;
 import ru.bellintegrator.db.service.YahooWeatherService;
-import ru.bellintegrator.db.view.YahooWeatherView;
-import ru.bellintegrator.db.view.map.YahooWeatherViewDeserialize;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.ActivationConfigProperty;
@@ -31,9 +30,6 @@ public class YahooWeatherListener extends SpringBeanAutowiringSupport implements
     @Autowired
     YahooWeatherService yahooWeatherService;
 
-    @Autowired
-    YahooWeatherViewDeserialize yahooWeatherViewDeserialize;
-
     @PostConstruct
     public void init() throws Exception {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
@@ -42,8 +38,7 @@ public class YahooWeatherListener extends SpringBeanAutowiringSupport implements
     @Override
     public void onMessage(Message message) {
         try {
-            String weather = message.getBody(String.class);
-            YahooWeatherView yahooWeatherView = yahooWeatherViewDeserialize.map(weather);
+            YahooWeatherView yahooWeatherView = message.getBody(YahooWeatherView.class);
             yahooWeatherService.saveWeather(yahooWeatherView);
         } catch (JMSException e) {
             throw new RuntimeException("(Custom) Error recieving message", e);

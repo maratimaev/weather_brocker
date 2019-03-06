@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import java.util.List;
 
 @Entity
 @Table(name = "yahoo_weather")
@@ -16,16 +18,24 @@ public class YahooWeather {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "loc_id")
     private Location location;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "obs_id")
+    private CurrentObservation currentObservation;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "for_id")
+    private List<Forecast> forecastList;
 
     @Version
     private Integer version;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -35,5 +45,21 @@ public class YahooWeather {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public CurrentObservation getCurrentObservation() {
+        return currentObservation;
+    }
+
+    public void setCurrentObservation(CurrentObservation currentObservation) {
+        this.currentObservation = currentObservation;
+    }
+
+    public List<Forecast> getForecastList() {
+        return forecastList;
+    }
+
+    public void setForecastList(List<Forecast> forecastList) {
+        this.forecastList = forecastList;
     }
 }

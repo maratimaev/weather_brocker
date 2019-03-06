@@ -12,6 +12,7 @@
     <groupId>ru.bellintegrator.common</groupId>
     <artifactId>common_interface</artifactId>
     <version>1.0</version>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -19,5 +20,4 @@
             <version>2.9.8</version>
         </dependency>
     </dependencies>
-
 </project>

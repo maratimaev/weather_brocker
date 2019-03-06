@@ -3,13 +3,10 @@ package ru.bellintegrator.db.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bellintegrator.common.view.YahooWeatherView;
 import ru.bellintegrator.db.dao.YahooWeatherDao;
 import ru.bellintegrator.db.model.YahooWeather;
 import ru.bellintegrator.db.model.mapper.MapperFacade;
-import ru.bellintegrator.db.view.YahooWeatherView;
-
-import java.util.List;
-
 
 @Service
 public class YahooWeatherServiceImpl implements YahooWeatherService{
@@ -31,9 +28,9 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
 
     @Override
     @Transactional
-    public List<YahooWeatherView> findAll() {
-        List<YahooWeather> yahooWeatherList = yahooWeatherDao.findAll();
-        List<YahooWeatherView> yahooWeatherViewList = mapperFacade.mapAsList(yahooWeatherList, YahooWeatherView.class);
-        return yahooWeatherViewList;
+    public YahooWeatherView getYahooWeather(String city) {
+        YahooWeather yahooWeather = yahooWeatherDao.findWeather(city);
+        YahooWeatherView yahooWeatherView = mapperFacade.map(yahooWeather, YahooWeatherView.class);
+        return yahooWeatherView;
     }
 }

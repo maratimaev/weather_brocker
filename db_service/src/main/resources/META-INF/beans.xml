@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="ru.bellintegrator.db"/>
+    <context:component-scan base-package="ru.bellintegrator"/>
 
     <!--maven commons-dbcp-->
     <!-- Database Information -->
@@ -29,26 +29,27 @@
     <bean id="hibernate4AnnotatedSessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>ru.bellintegrator.db.model.YahooWeather</value>
-                <value>ru.bellintegrator.db.model.Location</value>
-            </list>
-        </property>
+        <property name="packagesToScan" value="ru.bellintegrator.db.model"/>
+        <!--<property name="annotatedClasses">-->
+            <!--<list>-->
+                <!--<value>ru.bellintegrator.db.model.YahooWeather</value>-->
+                <!--<value>ru.bellintegrator.db.model.Location</value>-->
+            <!--</list>-->
+        <!--</property>-->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect
                 </prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="javax.persistence.schema-generation.database.action">drop-and-create</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                <!--<prop key="javax.persistence.schema-generation.database.action">drop-and-create</prop>-->
             </props>
         </property>
     </bean>
 
     <!--YahooWeatherDao and YahooWeatherService beans-->
-    <bean id="yahooWeatherDaoId" name="yahooWeatherDao" class="ru.bellintegrator.db.dao.YahooWeatherDaoIml">
+    <bean id="yahooWeatherDao" class="ru.bellintegrator.db.dao.YahooWeatherDaoIml">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
@@ -56,12 +57,12 @@
         <property name="yahooWeatherDao" ref="yahooWeatherDao"/>
     </bean>
 
-    <bean id="commonWeatherService" class="ru.bellintegrator.db.service.CommonWeatherServiceImpl">
-        <property name="yahooWeatherDao" ref="yahooWeatherDao"/>
-        <property name="mapperFacade" ref="mapperFacadeImpl"/>
-    </bean>
+    <!--<bean id="commonWeatherService" class="ProxyWeatherServiceImpl>-->
+        <!--<property name="yahooWeatherDao" ref="yahooWeatherDao"/>-->
+        <!--<property name="mapperFacade" ref="mapperFacadeImpl"/>-->
+    <!--</bean>-->
 
-    <context:component-scan base-package="ru.bellintegrator"/>
+    <bean id="mapperFacadeImplId" name="mapperFacade" class="ru.bellintegrator.db.model.mapper.MapperFacadeImpl"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 

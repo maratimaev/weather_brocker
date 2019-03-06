@@ -12,21 +12,21 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/applicationContext.xml
+            classpath:/META-INF/beans.xml
         </param-value>
     </context-param>
 
     <servlet>
         <servlet-name>get</servlet-name>
         <!--<servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>-->
-        <servlet-class>ru.bellintegrator.db.FireServlet</servlet-class>
+        <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
         <init-param>
             <param-name>service-class</param-name>
-            <param-value>ru.bellintegrator.db.service.CommonWeatherServiceImpl</param-value>
+            <param-value>ru.bellintegrator.db.service.ProxyWeatherServiceImpl</param-value>
         </init-param>
         <init-param>
             <param-name>api-class</param-name>
-            <param-value>ru.bellintegrator.common.CommonWeatherService</param-value>
+            <param-value>ru.bellintegrator.common.ProxyWeatherService</param-value>
         </init-param>
     </servlet>
 
@@ -34,24 +34,5 @@
         <servlet-name>get</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
-
-    <!--<servlet>-->
-        <!--<servlet-name>math</servlet-name>-->
-        <!--<servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>service-class</param-name>-->
-            <!--<param-value>ru.bellintegrator.db.MathServiceImpl</param-value>-->
-        <!--</init-param>-->
-        <!--<init-param>-->
-            <!--<param-name>api-class</param-name>-->
-            <!--<param-value>ru.bellintegrator.db.MathService</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>math</servlet-name>-->
-        <!--<url-pattern>/hessian/math</url-pattern>-->
-    <!--</servlet-mapping>-->
-
 
 </web-app>
