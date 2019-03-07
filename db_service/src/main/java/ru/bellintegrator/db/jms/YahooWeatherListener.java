@@ -31,7 +31,7 @@ public class YahooWeatherListener extends SpringBeanAutowiringSupport implements
     YahooWeatherService yahooWeatherService;
 
     @PostConstruct
-    public void init() throws Exception {
+    public void init() {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 

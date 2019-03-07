@@ -22,7 +22,7 @@ public class YahooWeatherDaoIml implements YahooWeatherDao{
             Session session = this.sessionFactory.getCurrentSession();
             session.persist(yahooWeather);
         }catch (Exception e) {
-            System.out.println(e);
+            throw new RuntimeException("(Custom) Error while saving YahooWeather to DB", e);
         }
     }
 

@@ -22,15 +22,24 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
 
     @Transactional
     public void saveWeather(YahooWeatherView yahooWeatherView) {
-        YahooWeather yahooWeather = mapperFacade.mapToModel(yahooWeatherView, new YahooWeather());
+        YahooWeather yahooWeather = getYahooWeather(yahooWeatherView.getLocationView().getCity());
+        if (yahooWeather == null) {
+            yahooWeather = new YahooWeather();
+        }
+        mapperFacade.mapToModel(yahooWeatherView, yahooWeather);
         yahooWeatherDao.save(yahooWeather);
     }
 
     @Override
-    @Transactional
-    public YahooWeatherView getYahooWeather(String city) {
-        YahooWeather yahooWeather = yahooWeatherDao.findWeather(city);
-        YahooWeatherView yahooWeatherView = mapperFacade.map(yahooWeather, YahooWeatherView.class);
-        return yahooWeatherView;
+    @Transactional(readOnly = true)
+    public YahooWeather getYahooWeather(String city) {
+        return yahooWeatherDao.findWeather(city);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public YahooWeatherView getYahooWeatherView(String city) {
+        YahooWeather yahooWeather = getYahooWeather(city);
+        return mapperFacade.map(yahooWeather, YahooWeatherView.class);
     }
 }

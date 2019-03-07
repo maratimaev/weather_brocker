@@ -1,8 +1,10 @@
 package ru.bellintegrator.db.service;
 
 import ru.bellintegrator.common.view.YahooWeatherView;
+import ru.bellintegrator.db.model.YahooWeather;
 
 public interface YahooWeatherService {
-    public void saveWeather(YahooWeatherView yahooWeatherView);
-    YahooWeatherView getYahooWeather(String city);
+    void saveWeather(YahooWeatherView yahooWeatherView);
+    YahooWeather getYahooWeather(String city);
+    YahooWeatherView getYahooWeatherView(String city);
 }

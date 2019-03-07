@@ -60,6 +60,11 @@ public class YahooWeather {
     }
 
     public void setForecastList(List<Forecast> forecastList) {
-        this.forecastList = forecastList;
+        if (this.forecastList == null) {
+            this.forecastList = forecastList;
+        } else {
+            this.forecastList.clear();
+            this.forecastList.addAll(forecastList);
+        }
     }
 }

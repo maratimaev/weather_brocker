@@ -8,11 +8,6 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="ru.bellintegrator" />
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
-
     <bean id="getWeather" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
         <property name="serviceUrl" value="http://localhost:8080/db_service/list"/>
         <property name="serviceInterface" value="ru.bellintegrator.common.ProxyWeatherService"/>

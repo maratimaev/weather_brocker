@@ -5,23 +5,17 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import ru.bellintegrator.common.ProxyWeatherService;
 import ru.bellintegrator.common.view.YahooWeatherView;
 
 @RestController
 public class GetWeatherController {
 
     @Autowired
-    private GetWeatherService getWeatherService;
+    private ProxyWeatherService proxyWeatherService;
 
     @GetMapping(value = "/{city}", produces = MediaType.APPLICATION_JSON_VALUE)
     public YahooWeatherView organizationById(@PathVariable String city) {
-        return getWeatherService.get(city);
+        return proxyWeatherService.getWeather(city);
     }
-
-
-//    @RequestMapping(value="/index", method = RequestMethod.GET)
-//    public String viewHome(){
-//        List<YahooWeatherView> yahooWeatherViewList = getWeatherService.list();
-//        return "index";
-//    }
 }
