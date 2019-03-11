@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "yahoo_weather")
@@ -66,5 +67,20 @@ public class YahooWeather {
             this.forecastList.clear();
             this.forecastList.addAll(forecastList);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        YahooWeather that = (YahooWeather) o;
+        return Objects.equals(location, that.location) &&
+                Objects.equals(currentObservation, that.currentObservation) &&
+                Objects.equals(forecastList, that.forecastList);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }
