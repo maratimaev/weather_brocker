@@ -10,7 +10,7 @@ import javax.jms.JMSContext;
 import javax.jms.Queue;
 
 @Stateless
-public class DbServiceSender {
+public class ToDbServiceSender {
     @Inject
     @JMSConnectionFactory("java:/ConnectionFactory")
     JMSContext context;

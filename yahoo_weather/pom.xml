@@ -34,6 +34,13 @@
         <version>8.0</version>
         <scope>provided</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.xlate/property-inject -->
+    <dependency>
+        <groupId>io.xlate</groupId>
+        <artifactId>property-inject</artifactId>
+        <version>1.0.4</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.wildfly.plugins/wildfly-maven-plugin -->
     <dependency>
         <groupId>org.wildfly.plugins</groupId>

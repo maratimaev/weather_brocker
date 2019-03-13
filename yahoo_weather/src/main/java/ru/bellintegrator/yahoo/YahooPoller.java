@@ -6,10 +6,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import ru.bellintegrator.yahoo.configuration.PropertyReader;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
@@ -21,14 +23,21 @@ import java.util.List;
 import java.util.Random;
 
 @Stateless
-public class PollYahoo {
+public class YahooPoller {
+    @Inject
+    PropertyReader propertyReader;
 
-    private static final String APP_ID = "kYAIGJ64";
-    private static final String CONSUMER_KEY = "dj0yJmk9YUNnMjZIellNYTRXJnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWE3";
-    private static final String CONSUMER_SECRET = "23081a84d99662043bded37ead72a8b4ab919ae2";
-    private static final String URL = "https://weather-ydn-yql.media.yahoo.com/forecastrss";
+    private String APP_ID;
+    private String CONSUMER_KEY;
+    private String CONSUMER_SECRET;
+    private String URL;
 
     public String get(String city) {
+        this.APP_ID = propertyReader.getProperty("APP_ID");
+        this.CONSUMER_KEY = propertyReader.getProperty("CONSUMER_KEY");
+        this.CONSUMER_SECRET = propertyReader.getProperty("CONSUMER_SECRET");
+        this.URL = propertyReader.getProperty("URL");
+
         long timestamp = new Date().getTime() / 1000;
         byte[] nonce = new byte[32];
         Random rand = new Random();
@@ -82,12 +91,10 @@ public class PollYahoo {
     }
 
     private String encodeToUtf8(String str) {
-        String result;
         try {
-            result = URLEncoder.encode(str, "UTF-8");
+            return URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("String converting to utf8 error", e);
         }
-        return result;
     }
 }

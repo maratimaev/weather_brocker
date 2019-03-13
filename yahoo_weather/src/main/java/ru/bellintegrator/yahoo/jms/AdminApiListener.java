@@ -1,6 +1,6 @@
 package ru.bellintegrator.yahoo.jms;
 
-import ru.bellintegrator.yahoo.Service;
+import ru.bellintegrator.yahoo.YahooWeatherService;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
@@ -25,12 +25,12 @@ import javax.jms.MessageListener;
 public class AdminApiListener implements MessageListener {
 
     @Inject
-    Service service;
+    YahooWeatherService yahooWeatherService;
 
     @Override
     public void onMessage(Message message) {
         try {
-            service.RequestWeather(message.getBody(String.class));
+            yahooWeatherService.RequestWeather(message.getBody(String.class));
         } catch (JMSException e) {
             throw new RuntimeException("Error recieving message", e);
         }

@@ -9,7 +9,7 @@ import javax.jms.JMSContext;
 import javax.jms.Queue;
 
 @Stateless
-public class WeatherLocation {
+public class ToYahooWeatherSender {
     @Inject
     @JMSConnectionFactory("java:/ConnectionFactory")
     JMSContext context;

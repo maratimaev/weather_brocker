@@ -5,10 +5,11 @@ package ru.bellintegrator.yahoo;
 //import static org.hamcrest.core.Is.is;
 //import static org.junit.Assert.assertThat;
 //
+//TODO
 public class PollYahooTest {
 //    @Test
 //    public void whenPollYahooThenGetWeather() {
-//        PollYahoo pollYahoo = new PollYahoo();
-//        assertThat(pollYahoo.get("Ufa").contains("Bashkortostan Republic"), is(true));
+//        YahooPoller yahooPoller = new YahooPoller();
+//        assertThat(yahooPoller.get("Ufa").contains("Bashkortostan Republic"), is(true));
 //    }
 }
