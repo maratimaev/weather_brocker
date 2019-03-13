@@ -30,9 +30,13 @@ public class AdminApiListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
         try {
-            yahooWeatherService.RequestWeather(message.getBody(String.class));
+            if(message.isBodyAssignableTo(String.class)) {
+                yahooWeatherService.requestWeather(message.getBody(String.class));
+            }else {
+                throw new RuntimeException("Incorrect message body type, must be String ");
+            }
         } catch (JMSException e) {
-            throw new RuntimeException("Error recieving message", e);
+            throw new RuntimeException("Error receiving String message ", e);
         }
     }
 }

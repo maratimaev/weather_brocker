@@ -17,7 +17,7 @@ public class YahooWeatherService {
     @Inject
     ToDbServiceSender toDbServiceSender;
 
-    public void RequestWeather(String cityName) {
+    public void requestWeather(String cityName) {
         String json = yahooPoller.get(cityName);
         YahooWeatherView yahooWeatherView = yahooWeatherDeserializer.map(json);
         toDbServiceSender.sendMessage(yahooWeatherView);

@@ -19,7 +19,7 @@ public class PropertyReader {
         try {
             this.property.load(inputStream);
         } catch (IOException e) {
-            throw new RuntimeException("Fail to read application.properties file", e);
+            throw new RuntimeException("Fail to read application.properties file ", e);
         }
         return this.property.getProperty(name);
     }
