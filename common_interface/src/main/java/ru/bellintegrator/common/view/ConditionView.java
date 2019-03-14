@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**
+ * Отображение текущих температурных данных
+ */
 @JsonPropertyOrder({
         "text",
         "code",
@@ -11,10 +14,19 @@ import java.io.Serializable;
 })
 public class ConditionView implements Serializable {
 
+    /**
+     * Облачность
+     */
     private String text;
 
+    /**
+     * Код
+     */
     private Integer code;
 
+    /**
+     * Температура
+     */
     private Integer temperature;
 
     public String getText() {

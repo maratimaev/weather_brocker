@@ -8,22 +8,39 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * Модель данных по ветру
+ */
 @Entity
 @Table(name = "wind")
 public class Wind {
-
+    /**
+     * Первичный ключ
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_wind")
     private Integer idWind;
 
+    /**
+     * Служебное поле JPA
+     */
     @Version
     private Integer version;
 
+    /**
+     * Температура ветра
+     */
     private Integer chill;
 
+    /**
+     * Направление ветра
+     */
     private Integer direction;
 
+    /**
+     * Скорость ветра
+     */
     private Float speed;
 
     public Integer getIdWind() {

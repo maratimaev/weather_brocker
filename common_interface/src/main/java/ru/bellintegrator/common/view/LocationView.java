@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**
+ * Отображение данных геолокации
+ */
 @JsonPropertyOrder({
         "woeid",
         "city",
@@ -16,21 +19,42 @@ import java.io.Serializable;
 })
 public class LocationView implements Serializable {
 
+    /**
+     * Идентификатор
+     */
     @JsonProperty("woeid")
     private Integer woeId;
 
+    /**
+     * Название города
+     */
     private String city;
 
+    /**
+     * Название региона
+     */
     private String region;
 
+    /**
+     * Название страны
+     */
     private String country;
 
+    /**
+     * Широта
+     */
     @JsonProperty("lat")
     private Float lattitude;
 
+    /**
+     * Долгота
+     */
     @JsonProperty("long")
     private Float longitude;
 
+    /**
+     * Временная зона
+     */
     @JsonProperty("timezone_id")
     private String timezoneId;
 

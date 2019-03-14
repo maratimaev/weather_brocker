@@ -4,14 +4,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**
+ * Отображение астрономических данных
+ */
 @JsonPropertyOrder({
         "sunrise",
         "sunset"
 })
 public class AstronomyView implements Serializable {
 
+    /**
+     * Время восхода
+     */
     private String sunrise;
 
+    /**
+     * Время заката
+     */
     private String sunset;
 
     public String getSunrise() {

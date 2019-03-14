@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**
+ * Отображение текущих погодных данных
+ */
 @JsonPropertyOrder({
         "wind",
         "atmosphere",
@@ -14,18 +17,33 @@ import java.io.Serializable;
 })
 public class CurrentObservationView implements Serializable {
 
+    /**
+     * Данные по ветру
+     */
     @JsonProperty("wind")
     private WindView windView;
 
+    /**
+     * Данные по атмосфере
+     */
     @JsonProperty("atmosphere")
     private AtmosphereView atmosphereView;
 
+    /**
+     * Астрономические данные
+     */
     @JsonProperty("astronomy")
     private AstronomyView astronomyView;
 
+    /**
+     * Температурные данные
+     */
     @JsonProperty("condition")
     private ConditionView conditionView;
 
+    /**
+     * Дата публикации прогноза
+     */
     private Long pubDate;
 
     public WindView getWindView() {

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**
+ * Отображение прогноза погоды
+ */
 @JsonPropertyOrder({
         "day",
         "date",
@@ -13,17 +16,34 @@ import java.io.Serializable;
         "code"
 })
 public class ForecastsView implements Serializable {
-
+    /**
+     * День недели прогнозируемой погоды
+     */
     private String day;
 
+    /**
+     * Дата прогнозируемой погоды
+     */
     private Long date;
 
+    /**
+     * Минимальный экстремум температуры
+     */
     private Integer low;
 
+    /**
+     * Максимальный экстремум температуры
+     */
     private Integer high;
 
+    /**
+     * Облачность
+     */
     private String text;
 
+    /**
+     * Код
+     */
     private Integer code;
 
     public String getDay() {

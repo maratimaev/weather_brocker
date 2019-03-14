@@ -6,18 +6,30 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Отображение метеоданных
+ */
 @JsonPropertyOrder({
         "location",
         "current_observation",
         "forecasts"
 })
 public class YahooWeatherView implements Serializable {
+    /**
+     * Данные геолокации
+     */
     @JsonProperty("location")
     private LocationView locationView;
 
+    /**
+     * Текущая погода
+     */
     @JsonProperty("current_observation")
     private CurrentObservationView currentObservationView;
 
+    /**
+     * Прогноз погоды на 10 дней
+     */
     @JsonProperty("forecasts")
     private List<ForecastsView> forecastsViewList;
 

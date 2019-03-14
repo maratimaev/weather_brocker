@@ -10,18 +10,33 @@ import ru.bellintegrator.db.model.mapper.MapperFacade;
 import ru.bellintegrator.db.repository.LocationRepository;
 import ru.bellintegrator.db.repository.YahooWeatherRepository;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class YahooWeatherServiceImpl implements YahooWeatherService{
 
+    /**
+     * Методы для работы с метеоданными
+     */
     @Autowired
     YahooWeatherRepository yahooWeatherRepository;
 
+    /**
+     * Методы для работы с географическими данными
+     */
     @Autowired
     LocationRepository locationRepository;
 
+    /**
+     * Фасад для преобразования между моделями БД и фронта
+     */
     @Autowired
     private MapperFacade mapperFacade;
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional
     public void saveWeather(YahooWeatherView yahooWeatherView) {
         YahooWeather yahooWeather = getYahooWeather(yahooWeatherView.getLocationView().getCity());
@@ -32,6 +47,9 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
         yahooWeatherRepository.saveAndFlush(yahooWeather);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public YahooWeather getYahooWeather(String city) {
@@ -40,6 +58,9 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
         return yahooWeather;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public YahooWeatherView getYahooWeatherView(String city) {

@@ -9,6 +9,10 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+/**
+ * Чтение данных из модуля admin_api по факту добавления сообщений в очередь
+ * Название очереди указано в jndi сервера приложений WildFly
+ */
 @MessageDriven(
         mappedName="java:/jms/queue/AdminApiToYahooWeather",
         activationConfig = {
@@ -24,9 +28,15 @@ import javax.jms.MessageListener;
         })
 public class AdminApiListener implements MessageListener {
 
+    /**
+     * Сервис обработки погодных данных
+     */
     @Inject
-    YahooWeatherService yahooWeatherService;
+    private YahooWeatherService yahooWeatherService;
 
+    /** Получение сообщений из очереди
+     * @param message название города
+     */
     @Override
     public void onMessage(Message message) {
         try {

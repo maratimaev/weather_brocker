@@ -12,6 +12,11 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+/**
+ * Чтение данных из модуля yahoo_weather по факту добавления сообщений в очередь
+ * Название очереди указано в jndi сервера приложений WildFly
+ * Инициализаци контекста Spring Framework через наследование SpringBeanAutowiringSupport
+ */
 @MessageDriven(
         mappedName="java:/jms/queue/YahooWeatherToDbService",
         activationConfig = {
@@ -27,6 +32,9 @@ import javax.jms.MessageListener;
         })
 public class YahooWeatherListener extends SpringBeanAutowiringSupport implements MessageListener {
 
+    /**
+     * Сервис работы с БД для модели YahooWeather
+     */
     @Autowired
     YahooWeatherService yahooWeatherService;
 
@@ -35,6 +43,9 @@ public class YahooWeatherListener extends SpringBeanAutowiringSupport implements
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
+    /** Получение сообщений из очереди
+     * @param message dto прогноза погоды YahooWeatherView
+     */
     @Override
     public void onMessage(Message message) {
         try {

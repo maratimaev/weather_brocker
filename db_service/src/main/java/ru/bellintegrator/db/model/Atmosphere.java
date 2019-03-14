@@ -8,22 +8,39 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * Модель атмосферных данных
+ */
 @Entity
 @Table(name = "atmosphere")
 public class Atmosphere {
-
+    /**
+     * Первичный  ключ
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_atm")
     private Integer idAtm;
 
+    /**
+     * Служебное поле JPA
+     */
     @Version
     private Integer version;
 
+    /**
+     * Влажность
+     */
     private Integer humidity;
 
+    /**
+     * Видимость
+     */
     private Integer visibility;
 
+    /**
+     * Давление
+     */
     private Float pressure;
 
     private Integer rising;

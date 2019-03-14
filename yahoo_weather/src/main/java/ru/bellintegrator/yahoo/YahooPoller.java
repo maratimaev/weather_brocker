@@ -22,16 +22,38 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Запрос погодных данных с сайта yahoo.com
+ */
 @Stateless
 public class YahooPoller {
+    /**
+     * Чтение параметров из application.properties
+     */
     @Inject
     PropertyReader propertyReader;
 
+    /**
+     * ID приложения на сайте yahoo.com
+     */
     private String APP_ID;
+    /**
+     * ключ пользователя
+     */
     private String CONSUMER_KEY;
+    /**
+     * пароль пользователя
+     */
     private String CONSUMER_SECRET;
+    /**
+     * адрес api yahoo.com
+     */
     private String URL;
 
+    /** Запрос прогноза по определенному городу
+     * @param city название города, для которого запрашивается прогноз
+     * @return json прогноза погоды
+     */
     public String get(String city) {
         this.APP_ID = propertyReader.getProperty("APP_ID");
         this.CONSUMER_KEY = propertyReader.getProperty("CONSUMER_KEY");

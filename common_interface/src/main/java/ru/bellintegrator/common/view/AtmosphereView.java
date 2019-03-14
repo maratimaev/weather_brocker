@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
 
+/**
+ * Отображение атмосферных данных
+ */
 @JsonPropertyOrder({
         "humidity",
         "visibility",
@@ -12,10 +15,19 @@ import java.io.Serializable;
 })
 public class AtmosphereView implements Serializable {
 
+    /**
+     * Влажность
+     */
     private Integer humidity;
 
+    /**
+     * Видимость
+     */
     private Integer visibility;
 
+    /**
+     * Давление
+     */
     private Float pressure;
 
     private Integer rising;

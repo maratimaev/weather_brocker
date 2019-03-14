@@ -6,7 +6,7 @@ import ru.bellintegrator.db.model.YahooWeather;
 import java.util.List;
 
 /**
- * Фасад для преобразования между можелями БД и фронта
+ * Фасад для преобразования между моделями БД и фронта
  */
 public interface MapperFacade {
 
@@ -34,13 +34,21 @@ public interface MapperFacade {
     /**
      * Преобразование коллекции оъектов
      *
-     * @param source
-     * @param destinationClass
-     * @param <S>
-     * @param <D>
-     * @return
+     * @param source            исходный объект
+     * @param destinationClass  класс, в который надо преобразовать объект
+     * @param <S>               тип исходного объекта
+     * @param <D>               тип объекта, к которому надо преобразовать исходный объект
+     * @return                  список объектов класса D
      */
     <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass);
 
+
+    /**
+     * Преобразование sourceObject в экземпляр класса YahooWeather
+     *
+     * @param yahooWeatherView  исходный объект
+     * @param YahooWeather      объект в который надо преобразовать
+     * @return                  объект YahooWeather с данными из yahooWeatherView
+     */
     YahooWeather mapToModel(YahooWeatherView yahooWeatherView, YahooWeather yahooWeather);
 }

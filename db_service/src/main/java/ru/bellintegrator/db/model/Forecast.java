@@ -8,30 +8,56 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * Модель рогноза погоды
+ */
 @Entity
 @Table(name = "forecast")
 public class Forecast {
-
+    /**
+     * Первичный ключ
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_for")
     private Integer idFor;
 
+    /**
+     * Служебное поле JPA
+     */
     @Version
     private Integer version;
 
+    /**
+     * День недели прогнозируемой погоды
+     */
     @Column(length = 3)
     private String day;
 
+    /**
+     * Дата прогнозируемой погоды
+     */
     private Long date;
 
+    /**
+     * Минимальный экстремум температуры
+     */
     private Integer low;
 
+    /**
+     * Максимальный экстремум температуры
+     */
     private Integer high;
 
+    /**
+     * Облачность
+     */
     @Column(length = 50)
     private String text;
 
+    /**
+     * Код
+     */
     private Integer code;
 
     public Integer getIdFor() {

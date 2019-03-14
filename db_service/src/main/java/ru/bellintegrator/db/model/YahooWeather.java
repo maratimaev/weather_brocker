@@ -13,26 +13,43 @@ import javax.persistence.Version;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Модель метеоданных
+ */
 @Entity
 @Table(name = "yahoo_weather")
 public class YahooWeather {
-
+    /**
+     * Первичный ключ
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Данные геолокации
+     */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "loc_id")
     private Location location;
 
+    /**
+     * Текущая погода
+     */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "obs_id")
     private CurrentObservation currentObservation;
 
+    /**
+     * Прогноз погоды на 10 дней
+     */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "for_id")
     private List<Forecast> forecastList;
 
+    /**
+     * Служебное поле JPA
+     */
     @Version
     private Integer version;
 

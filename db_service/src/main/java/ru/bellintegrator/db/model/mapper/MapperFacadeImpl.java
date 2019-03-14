@@ -48,6 +48,9 @@ public class MapperFacadeImpl implements MapperFacade {
         return mapperFactory.getMapperFacade().mapAsList(source, destinationClass);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public YahooWeather mapToModel(YahooWeatherView yahooWeatherView, YahooWeather yahooWeather) {
         mapperFactory.classMap(YahooWeatherView.class, YahooWeather.class)
                 .field("locationView", "location")
@@ -64,5 +67,4 @@ public class MapperFacadeImpl implements MapperFacade {
         mapperFactory.getMapperFacade(YahooWeatherView.class, YahooWeather.class).map(yahooWeatherView, yahooWeather);
         return yahooWeather;
     }
-
 }
