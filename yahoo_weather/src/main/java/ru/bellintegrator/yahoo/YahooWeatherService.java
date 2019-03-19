@@ -33,7 +33,7 @@ public class YahooWeatherService {
      * @param cityName название города
      */
     public void requestWeather(String cityName) {
-        String json = yahooPoller.get(cityName);
+        String json = yahooPoller.getWeatherFromYahoo(cityName);
         YahooWeatherView yahooWeatherView = yahooWeatherDeserializer.map(json);
         toDbServiceSender.sendMessage(yahooWeatherView);
     }

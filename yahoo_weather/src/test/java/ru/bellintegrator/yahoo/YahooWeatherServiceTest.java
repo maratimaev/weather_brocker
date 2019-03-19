@@ -64,12 +64,12 @@ public class YahooWeatherServiceTest {
     @Test
     public void whenGetCityNameThenPushYahooWeatherViewToQueue(){
         YahooWeatherView yahooWeatherView = mock(YahooWeatherView.class);
-        when(yahooPoller.get("Ufa")).thenReturn(jsonWeather);
+        when(yahooPoller.getWeatherFromYahoo("Ufa")).thenReturn(jsonWeather);
         when(yahooWeatherDeserializer.map(jsonWeather)).thenReturn(yahooWeatherView);
 
         yahooWeatherService.requestWeather("Ufa");
 
-        verify(yahooPoller, atLeast(1)).get("Ufa");
+        verify(yahooPoller, atLeast(1)).getWeatherFromYahoo("Ufa");
         verify(yahooWeatherDeserializer, atLeast(1)).map(jsonWeather);
         verify(toDbServiceSender, atLeast(1)).sendMessage(yahooWeatherView);
 
