@@ -39,6 +39,7 @@
         <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
+        <appache-commons>3.8.1</appache-commons>
     </properties>
 
     <modules>
@@ -172,6 +173,11 @@
                 <groupId>org.hibernate.javax.persistence</groupId>
                 <artifactId>hibernate-jpa-2.1-api</artifactId>
                 <version>${hibernate-jpa.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${appache-commons}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

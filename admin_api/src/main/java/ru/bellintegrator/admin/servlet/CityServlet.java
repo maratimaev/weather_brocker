@@ -1,5 +1,6 @@
 package ru.bellintegrator.admin.servlet;
 
+import org.apache.commons.lang3.StringUtils;
 import ru.bellintegrator.admin.service.CityNameSender;
 
 import javax.inject.Inject;
@@ -24,7 +25,7 @@ public class CityServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cityName = request.getParameter("cityName");
 
-        if (cityName == null || cityName.isEmpty()) {
+        if(StringUtils.isEmpty(cityName)){
             reloadJsp(request, response, "City name form must not to be null or empty");
         } else {
             cityNameSender.sendMessage(cityName);

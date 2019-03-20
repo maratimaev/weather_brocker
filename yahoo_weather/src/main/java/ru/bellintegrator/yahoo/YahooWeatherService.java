@@ -1,5 +1,6 @@
 package ru.bellintegrator.yahoo;
 
+import org.springframework.util.StringUtils;
 import ru.bellintegrator.common.view.YahooWeatherView;
 import ru.bellintegrator.yahoo.jms.WeatherViewSender;
 
@@ -33,7 +34,7 @@ public class YahooWeatherService {
      * @param cityName название города
      */
     public void requestWeather(String cityName) {
-        if(cityName == null || cityName.isEmpty()){
+        if(StringUtils.isEmpty(cityName)){
             throw new RuntimeException("(Custom) Error -> can't proceed polling yahoo.com, city name == null");
         }
         String json = yahooPoller.getWeatherFromYahoo(cityName);

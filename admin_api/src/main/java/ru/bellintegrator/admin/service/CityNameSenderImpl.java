@@ -1,5 +1,6 @@
 package ru.bellintegrator.admin.service;
 
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -31,7 +32,7 @@ public class CityNameSenderImpl implements CityNameSender {
      * @param message название города
      */
     public void sendMessage(String message) {
-        if(message == null || message.isEmpty()){
+        if(StringUtils.isEmpty(message)){
             throw new RuntimeException("(Custom) Error -> sending message == null");
         }
         context.createProducer().send(queue, message);

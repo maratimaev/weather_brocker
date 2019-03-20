@@ -1,6 +1,7 @@
 package ru.bellintegrator.yahoo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.util.StringUtils;
 import ru.bellintegrator.common.view.YahooWeatherView;
 
 import javax.ejb.Stateless;
@@ -16,7 +17,7 @@ public class YahooWeatherDeserializer {
      * @return dto погодных данных
      */
     public YahooWeatherView map(String weather) {
-        if(weather == null || weather.isEmpty()){
+        if(StringUtils.isEmpty(weather)){
             throw new RuntimeException("(Custom) Error -> json weather == null");
         }
         try {

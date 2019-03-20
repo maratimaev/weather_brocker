@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.crypto.Mac;
@@ -51,7 +52,7 @@ public class YahooPollerImpl implements YahooPoller {
      * {@inheritDoc}
      */
     public String getWeatherFromYahoo(String city) {
-        if(city == null || city.isEmpty()){
+        if(StringUtils.isEmpty(city)){
             throw new RuntimeException("(Custom) Error -> city name to poll yahoo.com == null");
         }
         long timestamp = new Date().getTime() / 1000;

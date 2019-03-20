@@ -1,5 +1,6 @@
 package ru.bellintegrator.db.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -23,7 +24,7 @@ public class ProxyWeatherServiceImpl extends SpringBeanAutowiringSupport impleme
      */
     @Override
     public YahooWeatherView getWeather(String city) {
-        if(city == null || city.isEmpty()){
+        if(StringUtils.isEmpty(city)){
             throw new RuntimeException("(Custom) Error -> not found city name (== null)");
         }
         return yahooWeatherService.getYahooWeatherView(city);

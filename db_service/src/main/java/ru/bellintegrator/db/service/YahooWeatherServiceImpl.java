@@ -1,5 +1,6 @@
 package ru.bellintegrator.db.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,30 +53,25 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
      */
     @Override
     @Transactional(readOnly = true)
-    public YahooWeather getYahooWeather(String city) {
-        YahooWeather yahooWeather;
-        if(city == null || city.isEmpty()){
-            yahooWeather = new YahooWeather();
-        } else {
-            Location location = locationRepository.findByCity(city);
-            yahooWeather = yahooWeatherRepository.findByLocation(location);
-        }
-        return yahooWeather;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Transactional(readOnly = true)
     public YahooWeatherView getYahooWeatherView(String city) {
         YahooWeatherView yahooWeatherView;
-        if(city == null || city.isEmpty()){
+        if(StringUtils.isEmpty(city)){
             yahooWeatherView = new YahooWeatherView();
         } else {
             YahooWeather yahooWeather = getYahooWeather(city);
             yahooWeatherView = mapperFacade.map(yahooWeather, YahooWeatherView.class);
         }
         return yahooWeatherView;
+    }
+
+    private YahooWeather getYahooWeather(String city) {
+        YahooWeather yahooWeather;
+        if(StringUtils.isEmpty(city)){
+            yahooWeather = new YahooWeather();
+        } else {
+            Location location = locationRepository.findByCity(city);
+            yahooWeather = yahooWeatherRepository.findByLocation(location);
+        }
+        return yahooWeather;
     }
 }
