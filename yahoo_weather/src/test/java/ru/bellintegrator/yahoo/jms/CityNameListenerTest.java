@@ -19,17 +19,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AdminApiListenerTest {
+public class CityNameListenerTest {
     @Mock
     private YahooWeatherService yahooWeatherService;
 
     @InjectMocks
-    private AdminApiListener adminApiListener;
+    private CityNameListener cityNameListener;
 
     @Before
     public void checkInjections(){
         Assert.assertNotNull(yahooWeatherService);
-        Assert.assertNotNull(adminApiListener);
+        Assert.assertNotNull(cityNameListener);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class AdminApiListenerTest {
         when(message.isBodyAssignableTo(String.class)).thenReturn(true);
         when(message.getBody(String.class)).thenReturn(location);
 
-        adminApiListener.onMessage(message);
+        cityNameListener.onMessage(message);
         verify(yahooWeatherService, atLeast(1)).requestWeather(location);
     }
 
@@ -49,7 +49,7 @@ public class AdminApiListenerTest {
         when(message.isBodyAssignableTo(String.class)).thenReturn(false);
 
         try {
-            adminApiListener.onMessage(message);
+            cityNameListener.onMessage(message);
         }catch (RuntimeException e){
             assertEquals(e.getMessage(), "Incorrect message body type, must be String ");
         }

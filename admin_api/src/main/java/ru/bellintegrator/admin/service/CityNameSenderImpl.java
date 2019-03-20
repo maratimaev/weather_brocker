@@ -1,4 +1,4 @@
-package ru.bellintegrator.admin;
+package ru.bellintegrator.admin.service;
 
 
 import javax.annotation.Resource;
@@ -13,24 +13,28 @@ import javax.jms.Queue;
  * Название очереди указано в jndi сервера приложений WildFly
  */
 @Stateless
-public class ToYahooWeatherSender {
+public class CityNameSenderImpl implements CityNameSender {
     /**
      * Контекст службы каталогов
      */
     @Inject
     @JMSConnectionFactory("java:/ConnectionFactory")
-    JMSContext context;
+    private JMSContext context;
 
     /**
      * Очередь для отправки сообщений
      */
     @Resource(mappedName = "java:/jms/queue/AdminApiToYahooWeather")
-    Queue queue;
+    private Queue queue;
 
     /** Отправка данных в очередь
      * @param message название города
      */
     public void sendMessage(String message) {
-            context.createProducer().send(queue, message);
+        if(message == null || message.isEmpty()){
+            throw new RuntimeException("(Custom) Error -> sending message == null");
+        }
+        context.createProducer().send(queue, message);
     }
+
 }

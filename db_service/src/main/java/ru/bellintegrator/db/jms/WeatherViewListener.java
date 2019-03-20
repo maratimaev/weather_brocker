@@ -30,13 +30,13 @@ import javax.jms.MessageListener;
                         propertyName = "destination",
                         propertyValue = "java:/jms/queue/YahooWeatherToDbService")
         })
-public class YahooWeatherListener extends SpringBeanAutowiringSupport implements MessageListener {
+public class WeatherViewListener extends SpringBeanAutowiringSupport implements MessageListener {
 
     /**
      * Сервис работы с БД для модели YahooWeather
      */
     @Autowired
-    YahooWeatherService yahooWeatherService;
+    private YahooWeatherService yahooWeatherService;
 
     @PostConstruct
     public void init() {
@@ -48,11 +48,15 @@ public class YahooWeatherListener extends SpringBeanAutowiringSupport implements
      */
     @Override
     public void onMessage(Message message) {
+        if(message == null){
+            throw new RuntimeException("(Custom) Error -> recieved message == null");
+        }
+
         try {
             YahooWeatherView yahooWeatherView = message.getBody(YahooWeatherView.class);
             yahooWeatherService.saveWeather(yahooWeatherView);
         } catch (JMSException e) {
-            throw new RuntimeException("(Custom) Error recieving message", e);
+            throw new RuntimeException("(Custom) Error message body incorrect", e);
         }
     }
 }

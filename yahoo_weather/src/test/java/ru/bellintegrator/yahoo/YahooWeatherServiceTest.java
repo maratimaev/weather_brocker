@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import ru.bellintegrator.common.view.YahooWeatherView;
-import ru.bellintegrator.yahoo.jms.ToDbServiceSender;
+import ru.bellintegrator.yahoo.jms.WeatherViewSender;
 
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
@@ -50,13 +50,13 @@ public class YahooWeatherServiceTest {
                     "}";
 
     @Mock
-    private YahooPoller yahooPoller;
+    private YahooPollerImpl yahooPoller;
 
     @Mock
     private YahooWeatherDeserializer yahooWeatherDeserializer;
 
     @Mock
-    private ToDbServiceSender toDbServiceSender;
+    private WeatherViewSender weatherViewSender;
 
     @InjectMocks
     private YahooWeatherService yahooWeatherService;
@@ -71,7 +71,7 @@ public class YahooWeatherServiceTest {
 
         verify(yahooPoller, atLeast(1)).getWeatherFromYahoo("Ufa");
         verify(yahooWeatherDeserializer, atLeast(1)).map(jsonWeather);
-        verify(toDbServiceSender, atLeast(1)).sendMessage(yahooWeatherView);
+        verify(weatherViewSender, atLeast(1)).sendMessage(yahooWeatherView);
 
     }
 }

@@ -1,4 +1,6 @@
-package ru.bellintegrator.admin;
+package ru.bellintegrator.admin.servlet;
+
+import ru.bellintegrator.admin.service.CityNameSender;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -13,7 +15,7 @@ import java.io.IOException;
 public class CityServlet extends HttpServlet {
 
     @Inject
-    private ToYahooWeatherSender toYahooWeatherSender;
+    private CityNameSender cityNameSender;
 
     /**
      * Получение названия города
@@ -25,7 +27,7 @@ public class CityServlet extends HttpServlet {
         if (cityName == null || cityName.isEmpty()) {
             reloadJsp(request, response, "City name form must not to be null or empty");
         } else {
-            toYahooWeatherSender.sendMessage(cityName);
+            cityNameSender.sendMessage(cityName);
             reloadJsp(request, response, "poll weather for " + cityName);
         }
     }

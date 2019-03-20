@@ -26,7 +26,7 @@ import javax.jms.MessageListener;
                         propertyName = "destination",
                         propertyValue = "java:/jms/queue/AdminApiToYahooWeather"),
         })
-public class AdminApiListener implements MessageListener {
+public class CityNameListener implements MessageListener {
 
     /**
      * Сервис обработки погодных данных
@@ -39,14 +39,17 @@ public class AdminApiListener implements MessageListener {
      */
     @Override
     public void onMessage(Message message) {
+        if(message == null){
+            throw new RuntimeException("(Custom) Error -> recieved message == null");
+        }
         try {
             if(message.isBodyAssignableTo(String.class)) {
                 yahooWeatherService.requestWeather(message.getBody(String.class));
             }else {
-                throw new RuntimeException("Incorrect message body type, must be String ");
+                throw new RuntimeException("(Custom) Incorrect message body type, must be String ");
             }
         } catch (JMSException e) {
-            throw new RuntimeException("Error receiving String message ", e);
+            throw new RuntimeException("(Custom) Error receiving String message ", e);
         }
     }
 }

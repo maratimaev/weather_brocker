@@ -15,19 +15,16 @@ import ru.bellintegrator.db.repository.YahooWeatherRepository;
  */
 @Service
 public class YahooWeatherServiceImpl implements YahooWeatherService{
-
     /**
      * Методы для работы с метеоданными
      */
     @Autowired
-    YahooWeatherRepository yahooWeatherRepository;
-
+    private YahooWeatherRepository yahooWeatherRepository;
     /**
      * Методы для работы с географическими данными
      */
     @Autowired
-    LocationRepository locationRepository;
-
+    private LocationRepository locationRepository;
     /**
      * Фасад для преобразования между моделями БД и фронта
      */
@@ -39,6 +36,9 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
      */
     @Transactional
     public void saveWeather(YahooWeatherView yahooWeatherView) {
+        if(yahooWeatherView == null){
+            throw new RuntimeException("(Custom) Error -> can't save null dto yahooWeatherView");
+        }
         YahooWeather yahooWeather = getYahooWeather(yahooWeatherView.getLocationView().getCity());
         if (yahooWeather == null) {
             yahooWeather = new YahooWeather();
@@ -53,8 +53,13 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
     @Override
     @Transactional(readOnly = true)
     public YahooWeather getYahooWeather(String city) {
-        Location location = locationRepository.findByCity(city);
-        YahooWeather yahooWeather = yahooWeatherRepository.findByLocation(location);
+        YahooWeather yahooWeather;
+        if(city == null || city.isEmpty()){
+            yahooWeather = new YahooWeather();
+        } else {
+            Location location = locationRepository.findByCity(city);
+            yahooWeather = yahooWeatherRepository.findByLocation(location);
+        }
         return yahooWeather;
     }
 
@@ -64,7 +69,13 @@ public class YahooWeatherServiceImpl implements YahooWeatherService{
     @Override
     @Transactional(readOnly = true)
     public YahooWeatherView getYahooWeatherView(String city) {
-        YahooWeather yahooWeather = getYahooWeather(city);
-        return mapperFacade.map(yahooWeather, YahooWeatherView.class);
+        YahooWeatherView yahooWeatherView;
+        if(city == null || city.isEmpty()){
+            yahooWeatherView = new YahooWeatherView();
+        } else {
+            YahooWeather yahooWeather = getYahooWeather(city);
+            yahooWeatherView = mapperFacade.map(yahooWeather, YahooWeatherView.class);
+        }
+        return yahooWeatherView;
     }
 }

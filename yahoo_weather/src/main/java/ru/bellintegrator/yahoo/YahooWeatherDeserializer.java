@@ -16,6 +16,9 @@ public class YahooWeatherDeserializer {
      * @return dto погодных данных
      */
     public YahooWeatherView map(String weather) {
+        if(weather == null || weather.isEmpty()){
+            throw new RuntimeException("(Custom) Error -> json weather == null");
+        }
         try {
             return new ObjectMapper().readerFor(YahooWeatherView.class).readValue(weather);
         } catch (IOException e) {

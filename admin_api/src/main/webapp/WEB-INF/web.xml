@@ -5,7 +5,7 @@
          version="4.0">
     <servlet>
         <servlet-name>City</servlet-name>
-        <servlet-class>ru.bellintegrator.admin.CityServlet</servlet-class>
+        <servlet-class>ru.bellintegrator.admin.servlet.CityServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>City</servlet-name>

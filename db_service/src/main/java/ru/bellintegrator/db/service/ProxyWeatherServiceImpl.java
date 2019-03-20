@@ -23,6 +23,9 @@ public class ProxyWeatherServiceImpl extends SpringBeanAutowiringSupport impleme
      */
     @Override
     public YahooWeatherView getWeather(String city) {
+        if(city == null || city.isEmpty()){
+            throw new RuntimeException("(Custom) Error -> not found city name (== null)");
+        }
         return yahooWeatherService.getYahooWeatherView(city);
     }
 }

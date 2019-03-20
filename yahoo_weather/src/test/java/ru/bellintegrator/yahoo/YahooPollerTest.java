@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 public class YahooPollerTest {
 
     @InjectMocks
-    private YahooPoller yahooPoller;
+    private YahooPollerImpl yahooPoller;
 
     private final static String APP_ID="kYAIGJ64";
     private final static String CONSUMER_KEY="dj0yJmk9YUNnMjZIellNYTRXJnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWE3";
